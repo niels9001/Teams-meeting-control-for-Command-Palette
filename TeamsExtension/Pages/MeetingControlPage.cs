@@ -15,7 +15,7 @@ internal sealed partial class MeetingControlPage : ListPage
     public MeetingControlPage(bool isBandPage = false)
     {
         _isBandPage = isBandPage;
-        Icon = Icons.Love;
+        Icon = Icons.AppLogo;
         Title = "Teams Meeting Control";
         Name = "Open";
     }

@@ -12,35 +12,65 @@
 
     <PublishProfile>win-$(Platform).pubxml</PublishProfile>
     <EnableMsixTooling>true</EnableMsixTooling>
+    <Copyright>(c) Niels Laute</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Product>Weather Command Palette</Product>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Assets\camera-off.dark.svg" />
-    <None Remove="Assets\hand.png" />
-    <None Remove="Assets\raise.dark.svg" />
-    <None Remove="Assets\raise.light.svg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Assets\camera-off.dark.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\hand.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\raise.dark.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\raise.light.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <!-- MSIX package assets (auto-scaled by the platform) -->
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\LargeTile.scale-100.png" />
+    <Content Include="Assets\LargeTile.scale-125.png" />
+    <Content Include="Assets\LargeTile.scale-150.png" />
+    <Content Include="Assets\LargeTile.scale-200.png" />
+    <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\SmallTile.scale-100.png" />
+    <Content Include="Assets\SmallTile.scale-125.png" />
+    <Content Include="Assets\SmallTile.scale-150.png" />
+    <Content Include="Assets\SmallTile.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <!-- Extension icons (copied to output for runtime use) -->
     <Content Include="Assets\mic-on.light.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\mic-on.dark.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\mic-off.light.svg" CopyToOutputDirectory="PreserveNewest" />
@@ -52,14 +82,14 @@
     <Content Include="Assets\blur.light.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\blur.dark.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\hangup.svg" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\raise.light.svg" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\raise.dark.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\like.png" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\love.png" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\applause.png" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\laugh.png" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\surprised.png" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\hand.png" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Assets\raise.light.svg" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Assets\raise.dark.svg" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

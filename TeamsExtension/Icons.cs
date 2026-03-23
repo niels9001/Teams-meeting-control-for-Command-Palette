@@ -4,6 +4,9 @@ namespace TeamsExtension;
 
 internal static class Icons
 {
+    // App logo
+    public static IconInfo AppLogo { get; } = IconHelpers.FromRelativePath("Assets\\StoreLogo.scale-200.png");
+
     // Microphone
     public static IconInfo MicOn { get; } = IconHelpers.FromRelativePaths(
         "Assets\\mic-on.light.svg",
