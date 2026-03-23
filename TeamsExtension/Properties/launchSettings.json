@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TeamsExtension (Package)": {
+      "commandName": "MsixPackage",
+      "doNotLaunchApp": true
+    },
+    "TeamsExtension (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

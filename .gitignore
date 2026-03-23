@@ -1,0 +1,33 @@
+## Build outputs
+bin/
+obj/
+x64/
+ARM64/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## NuGet
+packages/
+
+## OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+## MSIX packaging
+AppPackages/
+BundleArtifacts/
+*.appx
+*.msix
+*.appxbundle
+*.msixbundle
+*.appxupload
+*.msixupload
+
+*.Backup.tmp
