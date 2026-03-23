@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>TeamsExtension</RootNamespace>
@@ -14,63 +14,17 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <Copyright>(c) Niels Laute</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Product>Weather Command Palette</Product>
+    <Product>Teams Meeting Control for Command Palette</Product>
     <Nullable>enable</Nullable>
+
+    <AppxPackageIdentityName>27078NielsLaute.TeamsmeetingcontrolforCommandPalet</AppxPackageIdentityName>
+    <AppxPackagePublisher>CN=D821D027-C2F6-4E57-A741-849AE0C48C59</AppxPackagePublisher>
+    <AppxPackageVersion>0.0.1.0</AppxPackageVersion>
   </PropertyGroup>
+
   <ItemGroup>
-    <!-- MSIX package assets (auto-scaled by the platform) -->
-    <Content Include="Assets\StoreLogo.scale-100.png" />
-    <Content Include="Assets\StoreLogo.scale-125.png" />
-    <Content Include="Assets\StoreLogo.scale-150.png" />
-    <Content Include="Assets\StoreLogo.scale-200.png" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Assets\StoreLogo.scale-400.png" />
-    <Content Include="Assets\Square44x44Logo.scale-100.png" />
-    <Content Include="Assets\Square44x44Logo.scale-125.png" />
-    <Content Include="Assets\Square44x44Logo.scale-150.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-400.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
-    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
-    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
-    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
-    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
-    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
-    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
-    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
-    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
-    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
-    <Content Include="Assets\Square150x150Logo.scale-100.png" />
-    <Content Include="Assets\Square150x150Logo.scale-125.png" />
-    <Content Include="Assets\Square150x150Logo.scale-150.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-400.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <Content Include="Assets\LargeTile.scale-100.png" />
-    <Content Include="Assets\LargeTile.scale-125.png" />
-    <Content Include="Assets\LargeTile.scale-150.png" />
-    <Content Include="Assets\LargeTile.scale-200.png" />
-    <Content Include="Assets\LargeTile.scale-400.png" />
-    <Content Include="Assets\SmallTile.scale-100.png" />
-    <Content Include="Assets\SmallTile.scale-125.png" />
-    <Content Include="Assets\SmallTile.scale-150.png" />
-    <Content Include="Assets\SmallTile.scale-200.png" />
-    <Content Include="Assets\SmallTile.scale-400.png" />
-    <Content Include="Assets\SplashScreen.scale-100.png" />
-    <Content Include="Assets\SplashScreen.scale-125.png" />
-    <Content Include="Assets\SplashScreen.scale-150.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-400.png" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <!-- Extension icons (copied to output for runtime use) -->
+    <Content Include="Assets\**\*.png" />
+    <!-- Extension icons (SVGs and non-tile PNGs need CopyToOutputDirectory for runtime) -->
     <Content Include="Assets\mic-on.light.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\mic-on.dark.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\mic-off.light.svg" CopyToOutputDirectory="PreserveNewest" />
@@ -84,13 +38,32 @@
     <Content Include="Assets\hangup.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\raise.light.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\raise.dark.svg" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Assets\like.png" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Assets\love.png" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Assets\applause.png" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Assets\laugh.png" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Assets\surprised.png" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Assets\hand.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+
+  <!-- Copy scale-specific assets to base filenames expected by Store validations -->
+  <Target Name="PrepareAssets" BeforeTargets="BeforeBuild">
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Assets\Square150x150Logo.scale-200.png"
+          DestinationFiles="$(MSBuildProjectDirectory)\Assets\Square150x150Logo.png"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Assets\Square44x44Logo.scale-200.png"
+          DestinationFiles="$(MSBuildProjectDirectory)\Assets\Square44x44Logo.png"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Assets\Wide310x150Logo.scale-200.png"
+          DestinationFiles="$(MSBuildProjectDirectory)\Assets\Wide310x150Logo.png"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Assets\SplashScreen.scale-200.png"
+          DestinationFiles="$(MSBuildProjectDirectory)\Assets\SplashScreen.png"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Assets\LargeTile.scale-200.png"
+          DestinationFiles="$(MSBuildProjectDirectory)\Assets\LargeTile.png"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Assets\SmallTile.scale-200.png"
+          DestinationFiles="$(MSBuildProjectDirectory)\Assets\SmallTile.png"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Assets\StoreLogo.scale-100.png"
+          DestinationFiles="$(MSBuildProjectDirectory)\Assets\StoreLogo.png"
+          SkipUnchangedFiles="true" />
+  </Target>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
@@ -140,24 +113,15 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
-    <!-- In Debug builds, trimming is disabled by default, but all the trim & 
-         AOT warnings are enabled. This gives debug builds a tighter inner loop,
-         while at least warning about future trim violations -->
     <PublishTrimmed>false</PublishTrimmed>
-    
     <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
     <EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
     <EnableAotAnalyzer>true</EnableAotAnalyzer>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'!='Debug'">
-    <!-- In Release builds, trimming is enabled by default. 
-         feel free to disable this if needed -->
     <PublishTrimmed>true</PublishTrimmed>
-
-    <!-- In release, also ignore the aforementioned ILLink warning -->
     <ILLinkTreatWarningsAsErrors>false</ILLinkTreatWarningsAsErrors>
   </PropertyGroup>
-
 
 </Project>
