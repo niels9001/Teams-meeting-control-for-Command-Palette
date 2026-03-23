@@ -32,51 +32,56 @@ internal sealed partial class MeetingControlPage : ListPage
 
         var client = TeamsClientManager.Instance;
 
-        if (!client.IsConnected || !client.IsInMeeting)
+        // Not connected → show setup guide inline
+        if (!client.IsConnected)
         {
             if (_isBandPage)
             {
-                // Band shows nothing when not in a meeting
                 return [];
             }
 
-            return GetNotInMeetingItems(client.IsConnected);
+            return GetSetupItems();
         }
 
+        // Connected but not in a meeting
+        if (!client.IsInMeeting)
+        {
+            if (_isBandPage)
+            {
+                return [];
+            }
+
+            return GetNotInMeetingItems();
+        }
+
+        // In a meeting → show controls
         return BuildMeetingControlItems(client.CurrentState, client.CurrentPermissions, _isBandPage);
     }
 
-    private static IListItem[] GetNotInMeetingItems(bool isConnected)
+    private static IListItem[] GetSetupItems()
     {
-        var items = new List<IListItem>();
-
-        if (!isConnected)
-        {
-            items.Add(new ListItem(new NoOpCommand())
+        return
+        [
+            new ListItem(new SetupPage())
             {
-                Title = "Not connected to Teams",
-                Subtitle = "Make sure Teams is running and the API is enabled",
+                Title = "Teams API not configured",
+                Subtitle = "Set up the Teams third-party device API to get started",
                 Icon = new IconInfo("\uE783"), // Error
-            });
-        }
-        else
-        {
-            items.Add(new ListItem(new NoOpCommand())
+            },
+        ];
+    }
+
+    private static IListItem[] GetNotInMeetingItems()
+    {
+        return
+        [
+            new ListItem(new NoOpCommand())
             {
                 Title = "No active meeting",
                 Subtitle = "Join a Teams meeting to see controls here",
                 Icon = new IconInfo("\uE8AF"), // Clock / Waiting
-            });
-        }
-
-        items.Add(new ListItem(new SetupPage())
-        {
-            Title = "Setup guide",
-            Subtitle = "Learn how to enable the Teams API",
-            Icon = new IconInfo("\uE946"), // Info
-        });
-
-        return items.ToArray();
+            },
+        ];
     }
 
     private static IListItem[] BuildMeetingControlItems(MeetingState? state, MeetingPermissions? perms, bool isBandPage)
@@ -113,7 +118,7 @@ internal sealed partial class MeetingControlPage : ListPage
             {
                 Title = isBlurred ? "Unblur" : "Blur",
                 Icon = Icons.Blur,
-                Section = isBandPage ? string.Empty : "Call Controls",
+                Section = isBandPage ? string.Empty : "Call controls",
             });
         }
 
@@ -123,7 +128,7 @@ internal sealed partial class MeetingControlPage : ListPage
             {
                 Title = "Leave",
                 Icon = Icons.Hangup,
-                Section = isBandPage ? string.Empty : "Call Controls",
+                Section = isBandPage ? string.Empty : "Call controls",
             });
         }
 
@@ -133,7 +138,7 @@ internal sealed partial class MeetingControlPage : ListPage
             var isRaised = state?.IsHandRaised == true;
             items.Add(new ListItem(new ToggleHandCommand())
             {
-                Title = isRaised ? "Lower Hand" : "Raise Hand",
+                Title = isRaised ? "Lower hand" : "Raise hand",
                 Icon = isRaised ? Icons.HandRaised : Icons.HandRaise,
                 Section = isBandPage ? string.Empty : "Reactions",
             });

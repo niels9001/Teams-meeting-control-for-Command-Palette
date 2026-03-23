@@ -7,18 +7,19 @@ public partial class TeamsExtensionCommandsProvider : CommandProvider
 {
     private readonly ICommandItem[] _commands;
     private readonly ICommandItem _band;
+    private readonly MeetingControlPage _page;
 
     public TeamsExtensionCommandsProvider()
     {
         DisplayName = "Teams Meeting Control";
         Icon = Icons.AppLogo;
 
-        var page = new MeetingControlPage(isBandPage: false);
+        _page = new MeetingControlPage(isBandPage: false);
         var bandPage = new MeetingControlPage(isBandPage: true);
         _band = new CommandItem(bandPage) { Title = DisplayName };
         _commands =
         [
-            new CommandItem(page)
+            new CommandItem(_page)
             {
                 Title = "Teams Meeting Control",
                 Subtitle = "Control your Teams call",
@@ -34,5 +35,18 @@ public partial class TeamsExtensionCommandsProvider : CommandProvider
     public override ICommandItem[] GetDockBands()
     {
         return [_band];
+    }
+
+    public override ICommandItem? GetCommandItem(string id)
+    {
+        foreach (var item in _page.GetItems())
+        {
+            if (item.Command?.Id == id)
+            {
+                return item;
+            }
+        }
+
+        return null;
     }
 }

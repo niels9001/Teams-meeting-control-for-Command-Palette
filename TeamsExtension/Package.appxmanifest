@@ -16,7 +16,7 @@
        Publisher= to match your own identity -->
 
   <Properties>
-    <DisplayName>Teams Meeting Control</DisplayName>
+    <DisplayName>Teams Meeting Control for Command Palette</DisplayName>
     <PublisherDisplayName>Niels Laute</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -35,7 +35,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Teams Meeting Control"
+        DisplayName="Teams Meeting Control for Command Palette"
         Description="Control Microsoft Teams meetings from the Command Palette"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"

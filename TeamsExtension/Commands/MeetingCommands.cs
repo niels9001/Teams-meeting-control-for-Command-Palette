@@ -28,7 +28,8 @@ internal sealed partial class ToggleMuteCommand : MeetingActionCommand
 {
     public ToggleMuteCommand()
     {
-        Name = "Toggle Mute";
+        Name = "Toggle mute";
+        Id = "teams.toggle-mute";
         Icon = Icons.MicOn;
     }
 
@@ -51,7 +52,8 @@ internal sealed partial class ToggleVideoCommand : MeetingActionCommand
 {
     public ToggleVideoCommand()
     {
-        Name = "Toggle Camera";
+        Name = "Toggle camera";
+        Id = "teams.toggle-video";
         Icon = Icons.CameraOn;
     }
 
@@ -74,7 +76,8 @@ internal sealed partial class ToggleBlurCommand : MeetingActionCommand
 {
     public ToggleBlurCommand()
     {
-        Name = "Toggle Background Blur";
+        Name = "Toggle background blur";
+        Id = "teams.toggle-blur";
         Icon = Icons.Blur;
     }
 
@@ -97,8 +100,9 @@ internal sealed partial class ToggleHandCommand : MeetingActionCommand
 {
     public ToggleHandCommand()
     {
-        Name = "Raise/Lower Hand";
-        Icon = Icons.HandRaised;
+        Name = "Raise/lower hand";
+        Id = "teams.toggle-hand";
+        Icon = Icons.HandRaise;
     }
 
     public override ICommandResult Invoke()
@@ -120,7 +124,8 @@ internal sealed partial class LeaveCallCommand : MeetingActionCommand
 {
     public LeaveCallCommand()
     {
-        Name = "Leave Call";
+        Name = "Leave call";
+        Id = "teams.leave-call";
         Icon = Icons.Hangup;
     }
 
@@ -146,6 +151,7 @@ internal sealed partial class SendReactionCommand : MeetingActionCommand
     {
         _reactionType = reactionType;
         Name = displayName;
+        Id = $"teams.react-{reactionType}";
         Icon = icon;
     }
 
