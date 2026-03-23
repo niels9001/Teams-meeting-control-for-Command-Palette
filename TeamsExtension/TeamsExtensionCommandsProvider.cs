@@ -11,7 +11,7 @@ public partial class TeamsExtensionCommandsProvider : CommandProvider
 
     public TeamsExtensionCommandsProvider()
     {
-        DisplayName = "Teams Meeting Control";
+        DisplayName = "Teams Meeting Control for Command Palette";
         Icon = Icons.AppLogo;
 
         _page = new MeetingControlPage(isBandPage: false);

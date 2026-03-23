@@ -9,15 +9,13 @@
   IgnorableNamespaces="uap uap3 rescap">
 
   <Identity
-    Name="TeamsExtension"
-    Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+    Name="27078NielsLaute.TeamsmeetingcontrolforCommandPalet"
+    Publisher="CN=D821D027-C2F6-4E57-A741-849AE0C48C59"
     Version="0.0.1.0" />
-  <!-- When you're ready to publish your extension, you'll need to change the
-       Publisher= to match your own identity -->
 
   <Properties>
     <DisplayName>Teams Meeting Control for Command Palette</DisplayName>
-    <PublisherDisplayName>Niels Laute</PublisherDisplayName>
+    <PublisherDisplayName>NielsLaute</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -46,8 +44,8 @@
       <Extensions>
         <com:Extension Category="windows.comServer">
           <com:ComServer>
-            <com:ExeServer Executable="TeamsExtension.exe" Arguments="-RegisterProcessAsComServer" DisplayName="Teams Meeting Control">
-              <com:Class Id="a36be745-ce2d-4a07-9b76-1b9d26781563" DisplayName="Teams Meeting Control" />
+            <com:ExeServer Executable="TeamsExtension.exe" Arguments="-RegisterProcessAsComServer" DisplayName="Teams Meeting Control for Command Palette">
+              <com:Class Id="a36be745-ce2d-4a07-9b76-1b9d26781563" DisplayName="Teams Meeting Control for Command Palette" />
             </com:ExeServer>
           </com:ComServer>
         </com:Extension>
@@ -55,7 +53,7 @@
           <uap3:AppExtension Name="com.microsoft.commandpalette"
             Id="ID"
             PublicFolder="Public"
-            DisplayName="Teams Meeting Control"
+            DisplayName="Teams Meeting Control for Command Palette"
             Description="Control Microsoft Teams meetings from the Command Palette">
             <uap3:Properties>
               <CmdPalProvider>

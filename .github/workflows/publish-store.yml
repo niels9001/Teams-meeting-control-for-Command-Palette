@@ -1,0 +1,86 @@
+name: Build and publish to Microsoft Store
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        platform: [x64, ARM64]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Build MSIX package
+        run: |
+          dotnet publish TeamsExtension\TeamsExtension.csproj `
+            -c Release `
+            -p:Platform=${{ matrix.platform }} `
+            -p:AppxBundle=Never `
+            -p:GenerateAppxPackageOnBuild=true
+
+      - name: Upload MSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: msix-${{ matrix.platform }}
+          path: |
+            **/*.msix
+            **/*.msixupload
+
+  publish:
+    needs: build
+    runs-on: windows-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Download x64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: msix-x64
+          path: packages
+
+      - name: Download ARM64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: msix-ARM64
+          path: packages
+
+      - name: Setup Microsoft Store CLI
+        uses: microsoft/microsoft-store-apppublisher@v1.1
+
+      - name: Configure Store credentials
+        run: |
+          msstore reconfigure `
+            --tenantId ${{ secrets.AZURE_AD_TENANT_ID }} `
+            --sellerId ${{ secrets.SELLER_ID }} `
+            --clientId ${{ secrets.AZURE_AD_APPLICATION_CLIENT_ID }} `
+            --clientSecret ${{ secrets.AZURE_AD_APPLICATION_SECRET }}
+
+      - name: Find MSIX packages
+        id: find-packages
+        shell: pwsh
+        run: |
+          $packages = Get-ChildItem -Path packages -Recurse -Filter "*.msix" | Select-Object -ExpandProperty FullName
+          Write-Host "Found packages:"
+          $packages | ForEach-Object { Write-Host "  $_" }
+          $packageList = $packages -join ","
+          echo "PACKAGES=$packageList" >> $env:GITHUB_OUTPUT
+
+      - name: Publish to Microsoft Store
+        run: |
+          $packages = "${{ steps.find-packages.outputs.PACKAGES }}" -split ","
+          foreach ($pkg in $packages) {
+            Write-Host "Publishing: $pkg"
+            msstore publish $pkg -id 9P3055LD9JVD
+          }
