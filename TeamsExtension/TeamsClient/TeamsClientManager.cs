@@ -11,6 +11,7 @@ internal sealed partial class TeamsClientManager : IDisposable
     private readonly TeamsWebSocketClient _client = new();
     private readonly SemaphoreSlim _connectLock = new(1, 1);
     private bool _disposed;
+    private bool _receivedStateUpdate;
 
     private TeamsClientManager()
     {
@@ -28,7 +29,8 @@ internal sealed partial class TeamsClientManager : IDisposable
 
     public bool IsConnected => _client.IsConnected;
 
-    public bool IsInMeeting => CurrentState?.IsInMeeting == true;
+    public bool IsInMeeting => CurrentState?.IsInMeeting == true
+        || CurrentPermissions?.CanLeave == true;
 
     public event EventHandler? StateChanged;
 
@@ -46,6 +48,7 @@ internal sealed partial class TeamsClientManager : IDisposable
         {
             if (!_client.IsConnected && !_disposed)
             {
+                _receivedStateUpdate = false;
                 await _client.ConnectAsync().ConfigureAwait(false);
             }
         }
@@ -83,6 +86,8 @@ internal sealed partial class TeamsClientManager : IDisposable
 
     private void OnClientStateChanged(object? sender, MeetingUpdate update)
     {
+        _receivedStateUpdate = true;
+
         if (update.MeetingState is not null)
         {
             CurrentState = update.MeetingState;

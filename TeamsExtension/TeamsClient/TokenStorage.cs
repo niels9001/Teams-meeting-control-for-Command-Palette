@@ -45,4 +45,19 @@ internal static class TokenStorage
             // Best-effort save — non-critical if it fails
         }
     }
+
+    public static void ClearToken()
+    {
+        try
+        {
+            if (File.Exists(TokenFilePath))
+            {
+                File.Delete(TokenFilePath);
+            }
+        }
+        catch
+        {
+            // Best-effort delete
+        }
+    }
 }

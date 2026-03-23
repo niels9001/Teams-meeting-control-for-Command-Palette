@@ -54,7 +54,7 @@ internal sealed partial class MeetingControlPage : ListPage
         {
             items.Add(new ListItem(new NoOpCommand())
             {
-                Title = "Not Connected to Teams",
+                Title = "Not connected to Teams",
                 Subtitle = "Make sure Teams is running and the API is enabled",
                 Icon = new IconInfo("\uE783"), // Error
             });
@@ -63,7 +63,7 @@ internal sealed partial class MeetingControlPage : ListPage
         {
             items.Add(new ListItem(new NoOpCommand())
             {
-                Title = "No Active Meeting",
+                Title = "No active meeting",
                 Subtitle = "Join a Teams meeting to see controls here",
                 Icon = new IconInfo("\uE8AF"), // Clock / Waiting
             });
@@ -71,7 +71,7 @@ internal sealed partial class MeetingControlPage : ListPage
 
         items.Add(new ListItem(new SetupPage())
         {
-            Title = "Setup Guide",
+            Title = "Setup guide",
             Subtitle = "Learn how to enable the Teams API",
             Icon = new IconInfo("\uE946"), // Info
         });
