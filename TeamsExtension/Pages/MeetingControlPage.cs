@@ -18,11 +18,6 @@ internal sealed partial class MeetingControlPage : ListPage
         Icon = Icons.Love;
         Title = "Teams Meeting Control";
         Name = "Open";
-
-        if (!isBandPage)
-        {
-            GridProperties = new MediumGridLayout { ShowTitle = true };
-        }
     }
 
     public override IListItem[] GetItems()
