@@ -1,6 +1,6 @@
 # Teams Meeting Control for Command Palette
 
-Control your Microsoft Teams meetings directly from the Windows Command Palette. Mute, toggle camera, blur your background, send reactions, raise your hand, and leave calls — all without switching to the Teams window.
+Control your Microsoft Teams meetings directly from the Windows Command Palette. Mute, toggle camera, share your screen, blur your background, send reactions, raise your hand, and leave calls — all without switching to the Teams window.
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
@@ -8,6 +8,7 @@ Control your Microsoft Teams meetings directly from the Windows Command Palette.
 
 - **Mute / Unmute** — Toggle your microphone on or off
 - **Camera On / Off** — Toggle your camera
+- **Screen Share** — Toggle the share tray and stop active sharing
 - **Background Blur** — Blur or unblur your background
 - **Leave Call** — Leave the current meeting
 - **Raise / Lower Hand** — Get the speaker's attention
@@ -47,7 +48,7 @@ For more details, see the [Microsoft support page](https://support.microsoft.com
 ### Build from command line
 
 ```bash
-dotnet build TeamsExtension.sln -p:Platform=x64
+dotnet build TeamsExtension.sln -p:Platform=x64 -p:DefaultLanguage=en-US
 ```
 
 ### Deploy
@@ -62,13 +63,15 @@ dotnet publish TeamsExtension.sln -p:Platform=x64 -c Release
 
 ```
 TeamsExtension/
+├── Assets/                         — Extension icons and package assets
 ├── TeamsClient/
 │   ├── Models.cs                    — Protocol models & JSON serialization
 │   ├── TeamsWebSocketClient.cs      — WebSocket communication
 │   ├── TeamsClientManager.cs        — Singleton connection manager
 │   └── TokenStorage.cs              — Pairing token persistence
 ├── Commands/
-│   └── MeetingCommands.cs           — All meeting action commands
+│   ├── MeetingCommands.cs           — All meeting action commands
+│   └── TeamsMeetingWindowFocus.cs   — Best-effort Teams meeting window activation
 ├── Pages/
 │   ├── MeetingControlPage.cs        — Main grid page with action tiles
 │   └── SetupPage.cs                 — Setup instructions

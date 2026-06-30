@@ -94,7 +94,7 @@ internal sealed partial class TeamsWebSocketClient : IDisposable
         }
     }
 
-    public async Task SendActionAsync(string action, ReactionParameters? parameters = null)
+    public async Task SendActionAsync(string action, ActionParameters? parameters = null)
     {
         if (_webSocket?.State != WebSocketState.Open)
         {
@@ -127,7 +127,7 @@ internal sealed partial class TeamsWebSocketClient : IDisposable
 
     public async Task SendReactionAsync(string reactionType)
     {
-        await SendActionAsync(MeetingActions.SendReaction, new ReactionParameters { Type = reactionType }).ConfigureAwait(false);
+        await SendActionAsync(MeetingActions.SendReaction, new ActionParameters { Type = reactionType }).ConfigureAwait(false);
     }
 
     public async Task RequestMeetingStateAsync()
@@ -200,7 +200,11 @@ internal sealed partial class TeamsWebSocketClient : IDisposable
                 return;
             }
 
-            // Response messages are acknowledged but not acted upon
+            var responseMsg = JsonSerializer.Deserialize(json, TeamsJsonContext.Default.ResponseMessage);
+            if (responseMsg is not null && responseMsg.RequestId != 0)
+            {
+                Debug.WriteLine($"Teams response for request {responseMsg.RequestId}: {responseMsg.Response}");
+            }
         }
         catch (JsonException ex)
         {

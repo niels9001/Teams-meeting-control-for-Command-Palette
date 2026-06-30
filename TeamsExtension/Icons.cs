@@ -30,6 +30,15 @@ internal static class Icons
         "Assets\\blur.light.svg",
         "Assets\\blur.dark.svg");
 
+    // Screen sharing
+    public static IconInfo ShareScreen { get; } = IconHelpers.FromRelativePaths(
+        "Assets\\share-screen.light.svg",
+        "Assets\\share-screen.dark.svg");
+
+    public static IconInfo StopSharing { get; } = IconHelpers.FromRelativePaths(
+        "Assets\\stop-sharing.light.svg",
+        "Assets\\stop-sharing.dark.svg");
+
     // Leave call
     public static IconInfo Hangup { get; } = IconHelpers.FromRelativePath(
         "Assets\\hangup.svg");

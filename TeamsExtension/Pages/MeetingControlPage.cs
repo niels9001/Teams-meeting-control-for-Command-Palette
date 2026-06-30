@@ -122,6 +122,27 @@ internal sealed partial class MeetingControlPage : ListPage
             });
         }
 
+        var isSharing = state?.IsSharing == true || perms?.CanStopSharing == true;
+        if (perms?.CanToggleShareTray == true && !isSharing)
+        {
+            items.Add(new ListItem(new ToggleShareTrayCommand())
+            {
+                Title = "Share",
+                Icon = Icons.ShareScreen,
+                Section = isBandPage ? string.Empty : "Call controls",
+            });
+        }
+
+        if (perms?.CanStopSharing == true)
+        {
+            items.Add(new ListItem(new StopSharingCommand())
+            {
+                Title = "Stop sharing",
+                Icon = Icons.StopSharing,
+                Section = isBandPage ? string.Empty : "Call controls",
+            });
+        }
+
         if (perms?.CanLeave == true)
         {
             items.Add(new ListItem(new LeaveCallCommand())
