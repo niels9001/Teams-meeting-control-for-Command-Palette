@@ -35,6 +35,10 @@
     <Content Include="Assets\camera-off.dark.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\blur.light.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\blur.dark.svg" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\share-screen.light.svg" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\share-screen.dark.svg" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\stop-sharing.light.svg" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets\stop-sharing.dark.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\hangup.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\raise.light.svg" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets\raise.dark.svg" CopyToOutputDirectory="PreserveNewest" />

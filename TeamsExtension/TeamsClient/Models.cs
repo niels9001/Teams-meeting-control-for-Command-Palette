@@ -21,10 +21,10 @@ internal sealed class ControlMessage
 
     public string Action { get; set; } = string.Empty;
 
-    public ReactionParameters? Parameters { get; set; }
+    public ActionParameters? Parameters { get; set; }
 }
 
-internal sealed class ReactionParameters
+internal sealed class ActionParameters
 {
     public string Type { get; set; } = string.Empty;
 }
@@ -56,6 +56,8 @@ internal sealed class MeetingState
     public bool IsRecordingOn { get; set; }
 
     public bool IsBackgroundBlurred { get; set; }
+
+    public bool IsSharing { get; set; }
 }
 
 internal sealed class MeetingPermissions
@@ -101,11 +103,18 @@ internal static class MeetingActions
     public const string ToggleMute = "toggle-mute";
     public const string ToggleVideo = "toggle-video";
     public const string ToggleBackgroundBlur = "toggle-background-blur";
+    public const string ToggleUi = "toggle-ui";
+    public const string StopSharing = "stop-sharing";
     public const string ToggleHand = "toggle-hand";
     public const string ToggleRecording = "toggle-recording";
     public const string LeaveCall = "leave-call";
     public const string SendReaction = "send-reaction";
-    public const string QueryMeetingState = "query-meeting-state";
+    public const string QueryMeetingState = "query-state";
+}
+
+internal static class MeetingParameterTypes
+{
+    public const string ShareTray = "share-tray";
 }
 
 internal static class ReactionTypes

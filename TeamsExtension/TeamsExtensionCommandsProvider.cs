@@ -47,6 +47,8 @@ public partial class TeamsExtensionCommandsProvider : CommandProvider
         RegisterCommand(new ToggleMuteCommand());
         RegisterCommand(new ToggleVideoCommand());
         RegisterCommand(new ToggleBlurCommand());
+        RegisterCommand(new ToggleShareTrayCommand());
+        RegisterCommand(new StopSharingCommand());
         RegisterCommand(new ToggleHandCommand());
         RegisterCommand(new LeaveCallCommand());
         RegisterCommand(new SendReactionCommand(ReactionTypes.Like, "Like", Icons.Like));

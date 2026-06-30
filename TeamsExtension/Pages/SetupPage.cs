@@ -9,7 +9,7 @@ internal sealed partial class SetupPage : ContentPage
         # Teams Extension — Setup Guide
 
         This extension lets you control Microsoft Teams meetings directly from the Command Palette.
-        You can **mute/unmute**, **toggle camera**, **blur your background**, **raise your hand**,
+        You can **mute/unmute**, **toggle camera**, **share your screen**, **blur your background**, **raise your hand**,
         **send reactions**, and **leave the call**.
 
         ## How to Enable

@@ -58,10 +58,10 @@ internal sealed partial class TeamsClientManager : IDisposable
         }
     }
 
-    public async Task SendActionAsync(string action)
+    public async Task SendActionAsync(string action, ActionParameters? parameters = null)
     {
         await EnsureConnectedAsync().ConfigureAwait(false);
-        await _client.SendActionAsync(action).ConfigureAwait(false);
+        await _client.SendActionAsync(action, parameters).ConfigureAwait(false);
     }
 
     public async Task SendReactionAsync(string reactionType)

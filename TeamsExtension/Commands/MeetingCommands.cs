@@ -96,6 +96,55 @@ internal sealed partial class ToggleBlurCommand : MeetingActionCommand
     }
 }
 
+internal sealed partial class ToggleShareTrayCommand : MeetingActionCommand
+{
+    public ToggleShareTrayCommand()
+    {
+        Name = "Toggle share tray";
+        Id = "teams.toggle-share-tray";
+        Icon = Icons.ShareScreen;
+    }
+
+    public override ICommandResult Invoke()
+    {
+        try
+        {
+            _ = Client.SendActionAsync(
+                MeetingActions.ToggleUi,
+                new ActionParameters { Type = MeetingParameterTypes.ShareTray });
+            _ = TeamsMeetingWindowFocus.ActivateAsync();
+            return ShowActionToast("Toggled share tray");
+        }
+        catch (Exception ex)
+        {
+            return ShowErrorToast($"Failed to toggle share tray: {ex.Message}");
+        }
+    }
+}
+
+internal sealed partial class StopSharingCommand : MeetingActionCommand
+{
+    public StopSharingCommand()
+    {
+        Name = "Stop sharing";
+        Id = "teams.stop-sharing";
+        Icon = Icons.StopSharing;
+    }
+
+    public override ICommandResult Invoke()
+    {
+        try
+        {
+            _ = Client.SendActionAsync(MeetingActions.StopSharing);
+            return ShowActionToast("Stopped sharing");
+        }
+        catch (Exception ex)
+        {
+            return ShowErrorToast($"Failed to stop sharing: {ex.Message}");
+        }
+    }
+}
+
 internal sealed partial class ToggleHandCommand : MeetingActionCommand
 {
     public ToggleHandCommand()
